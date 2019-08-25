@@ -16,8 +16,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'id','name', 'email','username', 'password','telemovel', 'perfilId'
     ];
+
+    public function perfil(){
+        return $this->belongsTo('App\Perfil', 'perfilId');
+    }
 
     /**
      * The attributes that should be hidden for arrays.
