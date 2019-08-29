@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -29,6 +30,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    private $perfils; 
 
     /**
      * Create a new controller instance.
@@ -37,7 +39,20 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        $this->perfils = ['Administrador', 'Mediador'];
         $this->middleware('guest');
+    }
+
+    public function showRegistrationForm()
+    {
+        $perfilController = new PerfilController();
+
+        $perfils = array_filter($perfilController->get()->all(), function($perfil){
+            if($perfil['perfilId'] > 2)
+                return $perfil;
+        });
+
+        return view('auth.register', ['perfils' => array_reverse($perfils)]);
     }
 
     /**
@@ -51,6 +66,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'telemovel' => ['required', 'min:9','max:15', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -66,6 +82,8 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'telemovel' => $data['telemovel'],
+            'perfilId' => $data['perfilId'],
             'password' => Hash::make($data['password']),
         ]);
     }

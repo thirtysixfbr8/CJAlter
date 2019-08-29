@@ -18,10 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('username')->nullable();
             $table->string('email')->unique();
-            $table->string('telemovel')->unique();
+            $table->string('telemovel')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('perfilId');
+            $table->unsignedBigInteger('perfilId')->default('2');
             $table->foreign('perfilId')->references('perfilId')->on('perfils');
             $table->rememberToken();
             $table->timestamps();
