@@ -11,13 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/registerTemp', function () {
-    return view('auth.registerTemp');
-});
+Route::get('/', "BackofficeController@index");
 
 Auth::routes();
 
