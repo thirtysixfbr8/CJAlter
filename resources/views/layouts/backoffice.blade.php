@@ -5,17 +5,23 @@
 
         <title>{{$appContents['app']['title']}}</title>
         <link rel="icon" type="image/ico" href="{{ asset($appContents['app']['icon']) }}" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- vendor css files -->
         <link rel="stylesheet" href="{{ asset('assets/js/vendor/bootstrap/bootstrap.min.css') }}">    
         <link rel="stylesheet" href="{{ asset('assets/css/vendor/animsition.min.css') }}">
+        <link rel="stylesheet" href="assets/js/vendor/footable/css/footable.core.min.css">
         <link rel="stylesheet" href="{{ asset('assets/js/vendor/morris/morris.css') }}">    
         <!-- project main css files -->
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
         <style>
             #header .branding a.brand {
                 background: url("{{ asset($appContents['app']['logo'])}}") no-repeat 0 20px;
+            }
+            .btn-table-option{
+                padding: 0 1rem;
+                margin: 0 0;
             }
         </style>
     </head>
@@ -54,7 +60,7 @@
                                         <li class="list-group-item">
                                             <a role="button" class="media">
                                                 <span class="pull-left media-object">
-                                                    <i class="fa fa-briefcase"></i>
+                                                    <i class="{{ $item['icon'] }}"></i>
                                                 </span>
                                                 <div class="media-body">
                                                     <span class="block">{{ $item['option'] }}</span>
@@ -168,20 +174,39 @@
                                         <!--  NAVIGATION Content -->
                                         <ul id="navigation">
                                             @foreach ($appContents['admin_rightSide'] as $item)
-                                                @if($appContents['admin_rightSide'][0]==$item)
-                                                    <li class="active open">
-                                                        <a href="index.html">
-                                                            <i class="{{ $item['icon'] }}"></i>
-                                                            <span>{{ $item['title'] }}</span>
-                                                        </a>
-                                                    </li>
-                                                @else
+
+                                                @if(!empty($item['submenu']))
                                                     <li>
                                                         <a role="button" tabindex="0">
                                                             <i class="{{ $item['icon'] }}"></i>
                                                             <span>{{ $item['title'] }}</span>
                                                         </a>
+                                                        <ul>
+                                                            @foreach ($item['submenu'] as $subItem)
+                                                            <li>
+                                                                <a role="button" tabindex="0">
+                                                                    <i class="{{$subItem['icon']}}"></i> {{$subItem['title']}}
+                                                                </a>
+                                                            </li>
+                                                            @endforeach
+                                                        </ul>
                                                     </li>
+                                                @else
+                                                    @if($appContents['admin_rightSide'][0]==$item)
+                                                        <li class="active open">
+                                                            <a href="index.html">
+                                                                <i class="{{ $item['icon'] }}"></i>
+                                                                <span>{{ $item['title'] }}</span>
+                                                            </a>
+                                                        </li>
+                                                    @else
+                                                        <li>
+                                                            <a role="button" tabindex="0">
+                                                                <i class="{{ $item['icon'] }}"></i>
+                                                                <span>{{ $item['title'] }}</span>
+                                                            </a>
+                                                        </li>
+                                                    @endif
                                                 @endif
                                             @endforeach
                                         </ul>
@@ -218,6 +243,7 @@
         </div>
         <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
+        <script src="assets/js/vendor/footable/footable.all.min.js"></script>
 
         <!--/ vendor javascripts -->
         <script src="{{ asset('assets/bundles/flotscripts.bundle.js') }}"></script>    
@@ -229,6 +255,13 @@
 
         <!-- page Js -->
         <script src="{{ asset('assets/bundles/mainscripts.bundle.js') }}"></script>
+        <script >
+            $(window).load(function () {
+                $('.footable').footable();
+            });
+        </script>
+
         <script src="{{ asset('assets/js/page/index.js') }}"></script>     
+        
     </body>
 </html>

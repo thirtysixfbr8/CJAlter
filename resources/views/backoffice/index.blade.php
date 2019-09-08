@@ -18,21 +18,17 @@
                     </div>
                 </div>
                 <div class="row clearfix">
-
-                        
                     @foreach ($appContents['dashboards'] as $item)
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="boxs mini-social">
-                                <div class="boxs-body">
-                                    <div class="s-icon">
-                                        <i class="{{$item['icon']}}"></i>
+                                <section class="boxs boxs-simple tbox">
+                                    <div class="boxs-widget {{$item['color']}} text-center p-30 tcol -l">
+                                        <i class="{{$item['icon']}} fa-3x"></i>
                                     </div>
-                                    <div class="s-detail">
-                                        <div class="like"><span>40K</span></div>
-                                        <span>{{$item['title']}}</span>
+                                    <div class="boxs-body text-center tcol">
+                                        <h2 class="m-0">30%</h2>
+                                        <span class="text-muted">{{$item['title']}}</span>
                                     </div>
-                                </div>
-                            </div>
+                                </section>
                         </div>
                     @endforeach
                 </div>
