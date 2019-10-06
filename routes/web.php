@@ -11,8 +11,18 @@
 |
 */
 
-Route::get('/', "BackofficeController@index");
+Route::get('/', function (){
+    return view('auth.login');
+});
 
+Route::get('/backoffice', "BackofficeController@index")->name('backoffice.index');
+#Route::get('/backoffice/{user}', "BackofficeController@show")->name('backoffice.show'); pegar 
+############ Essa rota estou a pensar em fazer /backoffice/{perfil}/{user} -> para pegar os dados
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+#Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
+
+#Route::get('/backoffice/create','BackofficeController@create')->name('backoffice.create');

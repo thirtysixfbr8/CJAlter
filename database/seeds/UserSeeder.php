@@ -13,6 +13,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        //Campo para Foto;
+        //Os outros users não tem username papá
         User::insert([
             'name' => 'Administrador',
             'email'=>'admin@cja.co.ao',

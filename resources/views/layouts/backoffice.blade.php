@@ -137,21 +137,21 @@
                             <ul class="dropdown-menu pull-right" role="menu">
                                 <li>
                                     <div class="user-info">
-                                        <div class="user-name">Alexander</div>
+                                        <div class="user-name"> {{ auth()->user()->name }} </div>
                                         <div class="user-position online"></div>
                                     </div>
                                 </li>
                                 @foreach ($appContents['userOptions'] as $item)
                                     @if($appContents['userOptions'][0]==$item)
                                         <li>
-                                            <a href="profile.html" role="button" tabindex="0">
+                                            <a href="#" role="button" tabindex="0">
                                                 <span class="label label-success pull-right"></span>
                                                 <i class="fa fa-user"></i>{{$item['option']}}</a>
                                         </li>
                                         <li class="divider"></li>
                                     @else
                                         <li>
-                                            <a href="login.html" role="button" tabindex="0">
+                                            <a href="{{ route('logout') }}" role="button" tabindex="0">
                                                 <i class="fa fa-sign-out"></i>{{$item['option']}}</a>
                                         </li>
                                     @endif
@@ -184,7 +184,7 @@
                                                         <ul>
                                                             @foreach ($item['submenu'] as $subItem)
                                                             <li>
-                                                                <a role="button" tabindex="0">
+                                                                <a role="button" tabindex="0" data-toggle="modal" data-target="#form_users" value="{{$subItem['profile']}}" >
                                                                     <i class="{{$subItem['icon']}}"></i> {{$subItem['title']}}
                                                                 </a>
                                                             </li>
@@ -236,6 +236,89 @@
                     </div>
                 </aside>
             </div>
+        <div class="modal fade" id="form_users" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Cadastro de Mediador</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form class="form" method="POST" action="{{ route('register') }}">
+                  @csrf
+                  <div class="">     
+                    <h3 class="mt-0">CJA Seguros</h3>
+                    <p class="help-block">Insira os dados pessoais do Mediador abaixo:
+                  </div>
+                  </p>
+                  <div class="content">
+                    <div class=form-group>
+                        <input type="hidden" id="id_perfil" name="id_perfil" value="">
+                    </div>
+                    <div class="form-group">
+                      <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome" >
+                      @error('name')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}
+                        </strong>
+                      </span>
+                      @enderror
+                    </div>
+                    @if('a' == 'a')
+                    <div class="form-group">
+                      <input id="birth" type="date" class="form-control @error('birth') is-invalid @enderror" name="birth" value="{{ old('birth') }}" required autocomplete="birth" autofocus placeholder="Data de Nascimento" >
+                      @error('birth')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}
+                        </strong>
+                      </span>
+                      @enderror
+                    </div>
+                    @endif
+                    <div class="form-group">
+                      <input id="email" type="email" class="form-control underline-input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
+                      @error('email')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}
+                        </strong>
+                      </span>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <input id="telemovel" type="telemovel" class="form-control underline-input @error('telemovel') is-invalid @enderror" name="telemovel" value="{{ old('telemovel') }}" required autocomplete="telemovel" placeholder="Telemovel">
+                      @error('telemovel')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}
+                        </strong>
+                      </span>
+                      @enderror
+                    </div>
+                    
+                    <div class="form-group">
+                      <input id="password" placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                      @error('password')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}
+                        </strong>
+                      </span>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <input id="password-confirm" placeholder="Confirmar Password" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                    </div>
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <div class="footer text-center mb-20">
+                    <button type="submit" class="btn btn-info btn-raised">Registrar</button>
+                </div>
+            </div>
+            </form>
+            </div>
+        </div>
+        </div>
             @show
             <!-- Application Content -->
             @yield('content')
