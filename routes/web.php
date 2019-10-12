@@ -24,5 +24,14 @@ Auth::routes();
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
+#Para testes
+Route::get('/backoffice/mediador', function (){
+    $appContents = json_decode(Storage::disk('local')->get('page.json'), true);
+    return view('backoffice.mediador', compact('appContents'));
+});
+
+Route::get('/backoffice/{any}', 'VueController@index')->where('any', '.*');
+#EndTest
+
 
 #Route::get('/backoffice/create','BackofficeController@create')->name('backoffice.create');
