@@ -6,7 +6,7 @@
 
 @section('content')
 <!--  CONTENT  -->
-    <section id="content">
+    <!--section id="content"-->
         <div class="page page-tables-footable">
             <!-- bradcome -->
             <div class="b-b mb-10">
@@ -438,6 +438,6 @@
                 </div>
             </div>
         </div>
-    </section>
+    <!--/section-->
     <!--/ CONTENT -->
 @stop

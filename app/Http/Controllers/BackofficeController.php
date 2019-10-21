@@ -16,7 +16,7 @@ class BackofficeController extends Controller
     public function show(User $user){
         $user = User::findOrFail($user);
         $appContents = json_decode(Storage::disk('local')->get('page.json'), true); //Esse mambo é chato yh
-        return view('backoffice.perfil', compact('appContents',['user' => $user]));
+        return view('backoffice.mediador', compact('appContents',['user' => $user]));
     }
 
     public function index(){

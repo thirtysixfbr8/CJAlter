@@ -8,6 +8,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <script> window.Laravel = { CsrfToken: '{{ csrf_token() }}' } </script>
         <!-- vendor css files -->
         <link rel="stylesheet" href="{{ asset('assets/js/vendor/bootstrap/bootstrap.min.css') }}">    
         <link rel="stylesheet" href="{{ asset('assets/css/vendor/animsition.min.css') }}">
@@ -144,7 +146,7 @@
                                 @foreach ($appContents['userOptions'] as $item)
                                     @if($appContents['userOptions'][0]==$item)
                                         <li>
-                                            <router-link :to="{ name: 'profile }" role=button>
+                                            <!-- :to="{ name: 'profile }" role=button-->
                                                 <span class="label label-success pull-right"></span>
                                                 <i class="fa fa-user"></i>Perfil</a>
                                         </li>
@@ -163,7 +165,6 @@
                 </header>
             </div>
             <!--/ HEADER Content  -->
-            @section('sidebar')
             <div id="controls">
                 <aside id="leftmenu">
                     <div id="leftmenu-wrap">
@@ -236,12 +237,11 @@
                     </div>
                 </aside>
             </div>
-            @show
             <!-- Application Content -->
             @yield('content')
             <!--/ Application Content -->
         </div>
-
+        <script src="{{ asset('js/app.js') }}"></script> 
         <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
         <script src="assets/js/vendor/footable/footable.all.min.js"></script>
@@ -262,7 +262,6 @@
             });
         </script>
 
-        <script src="{{ asset('assets/js/page/index.js') }}"></script>     
-        
+        <script src="{{ asset('assets/js/page/index.js') }}"></script>
     </body>
 </html>

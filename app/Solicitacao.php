@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Solicitacao extends Model
 {
     protected $primaryKey = 'solicitacaoId';
-    protected $fillable = ['solicitacaoId', 'mediadorId','clienteId'];
+    protected $fillable = ['solicitacaoId', 'mediadorId','clienteId','estado'];
 
     public function seguros()
     {

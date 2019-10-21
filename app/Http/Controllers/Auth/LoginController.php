@@ -56,6 +56,17 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function update(Request $request, $id){
+
+        $user = App\User::findOrFail($id);
+        $user->name = $request->name;
+        $user->telemovel = $request->telemovel;
+        $user->email = $request->email;
+        $user->save();
+
+
+    }
+
     public function logout(Request $request){
         Auth::logout();
         return redirect('/login');

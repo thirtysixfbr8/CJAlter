@@ -5,16 +5,21 @@
 @endsection
 
 @section('content')
+<section id="content">
     <div id="app">
-        <app></app>
-        <example-component></example-component>
-        <profile-component></profile-component>
-    </div>
-    <script src="{{ mix('/js/app.js') }}"></script>
-@stop 
+        <router-view :user="{{ json_encode($user) }}" :app-contents="{{ json_encode($appContents) }}"></router-view>
+    </div> 
+</section>
+
+@stop
+
+    
 
    
-    
+
+
+
+
 
   
     
