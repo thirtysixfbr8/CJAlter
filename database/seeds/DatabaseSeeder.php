@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
             ModalidadeSeeder::class,
             PerfilSeeder::class,
             UserSeeder::class,
-            SolicitacaoSeeder::class
+            ClienteSeeder::class,
+            MediadorSeeder::class,
+            SolicitacaoSeeder::class,
         ]);
     }
 }

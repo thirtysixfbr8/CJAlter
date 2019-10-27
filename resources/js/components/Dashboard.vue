@@ -1,30 +1,30 @@
 <template>
         <!-- CONTENT -->
-        <section id="dashboard">
+        <section id="content">
             <div class="page dashboard-page">
                 <!--bradcome -->
                 <div class="b-b mb-20">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12">
-                            <h1 class="h3 m-0"> {{ appContents['admin_rightSide'][0]['title']}}</h1>
-                        <small class="text-muted"> {{ appContents['wellcome'] }}</small>
+                            <h1 class="h3 m-0"> Dashboard</h1>
+                        <small class="text-muted"> Bem Vindo à CJA Seguros</small>
                         </div>
                     </div>
                 </div>
                 <div class="row clearfix">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                <section class="boxs boxs-simple tbox" v-for="item in items" :key="item.icon" >
-                                    <div :class="'boxs-widget '+item.color+' text-center p-30 tcol -l'">
-                                        <i :class="item.icon+' fa-3x'"></i>
-                                    </div>
-                                    <div class="boxs-body text-center tcol">
-                                        <h2 class="m-0">25%</h2>
-                                        <span class="text-muted">{{ item.title }}</span>
-                                    </div>
-                                </section>
-                        </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12"  v-for="item in items" :key="item.icon">
+                        <section class="boxs boxs-simple tbox" >
+                            <div :class="'boxs-widget '+item.color+' text-center p-30 tcol -l'">
+                                <i :class="item.icon+' fa-3x'"></i>
+                            </div>
+                            <div class="boxs-body text-center tcol">
+                                <h2 class="m-0">25%</h2>
+                                <span class="text-muted">{{ item.title }}</span>
+                            </div>
+                        </section>
+                    </div>
                 </div>
-                <div class="row clearfix">
+                <!--<div class="row clearfix">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <section class="boxs">
                             <div class="boxs-header">
@@ -187,38 +187,47 @@
                             </div>
                         </section>
                     </div>
-                </div>
+                </div>-->
             </div>
-            <section class="container-fluid">
-                <div>
-                    <router-link :to="{ name:'profile-component', params: {userId: 5} }" class="btn btn-primary">Perfil</router-link>
-                    <router-link :to="{ name:'table-component'}" class="btn btn-primary">Solicitacoes</router-link>
-                </div>
-            </section>
-            
         </section>
     <!-- Vendor JavaScripts -->
 </template>
 <script>
 export default {
-    //:appComponents={{$appContents}}
-    props: ['appContents','user'],
+    props: ['user'],
 
     data(){
         return{
-            items: [],
+            items: [
+                    {
+                        "title": "Solicitações",
+                        "icon": "fa fa-envelope",
+                        "link": "",
+                        "color": "bg-amethyst"
+                    },
+                    {
+                        "title": "Empresas",
+                        "icon": "fa fa-institution",
+                        "link": "",
+                        "color": "bg-blush"
+                    },
+                    {
+                        "title": "Particulares",
+                        "icon": "fa fa-group",
+                        "link": "",
+                        "color": "bg-warning"
+                    },
+                    {
+                        "title": "Mediadores",
+                        "icon": "fa fa-user",
+                        "link": "",
+                        "color": "bg-danger"
+                    }
+                ],
         }
     },
     mounted() {
-        this.items = this.appContents['dashboards']
-        console.log('Dashboard mounted')
-        //axios.post('').then((response) => {
-            //this.appComponents = response.data;
-            //console.log(this.appContents);
-            //this.items = appComponents['dashboards'];
-            //console.log(this.item);
-        //});
-    
+        console.log('Dashboard mounted')    
     }
 }
       

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\User;
+use Auth;
 
 class BackofficeController extends Controller
 {
@@ -15,13 +16,12 @@ class BackofficeController extends Controller
     //Esta Função será util quando quisermos pegar os dados de um utilizador e mandar para o perfil
     public function show(User $user){
         $user = User::findOrFail($user);
-        $appContents = json_decode(Storage::disk('local')->get('page.json'), true); //Esse mambo é chato yh
-        return view('backoffice.mediador', compact('appContents',['user' => $user]));
+        return view('backoffice.backoffice', compact(['user' => $user]));
     }
 
     public function index(){
-        $appContents = json_decode(Storage::disk('local')->get('page.json'), true);
-        return view('backoffice.utilizador', compact('appContents'));
+        $user = Auth::user();
+        return view('backoffice.backoffice', compact('user'));
     }
     
     public function create(User $user){

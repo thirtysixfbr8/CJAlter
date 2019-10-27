@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mediador;
+use App\User;
 use Illuminate\Http\Request;
 
 class MediadorController extends Controller
@@ -24,9 +25,11 @@ class MediadorController extends Controller
      */
     public function create(User $user)
     {
-       //
-       Mediador::create();
-        
+        $mediador = new Mediador();
+        $user = $mediador->userable()->save($user);
+        $mediador->mediadorId = $user->id;
+        $mediador->save();
+        return $user;
     }
 
     /**
@@ -69,9 +72,9 @@ class MediadorController extends Controller
      * @param  \App\Mediador  $mediador
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mediador $mediador)
+    public function update(Request $request)
     {
-        //
+        
     }
 
     /**

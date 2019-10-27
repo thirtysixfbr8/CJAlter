@@ -56,11 +56,12 @@ class SolicitacaoController extends Controller
 
     }
 
-    /*Route::get('/backoffice/mediador/{user?}', function (User $user){
-        $user = User::findOrFail($user);
-        $appContents = json_decode(Storage::disk('local')->get('page.json'), true);
-        return view('backoffice.mediador', compact('appContents', 'user'));
-    });*/
+    public function getSolicitacoes(Request $request){
+        $user = User::findOrFail($request->get('userId'));
+        return Solicitacao::with('mediador', 'cliente')
+                ->orderBy('solicitacaos.created_at', 'desc')
+                ->get();
+    }
 
     /**
      * Show the form for editing the specified resource.

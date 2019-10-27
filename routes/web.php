@@ -10,33 +10,40 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use App\User;
+
 Route::get('/', function (){
-    return view('auth.login');
+    return redirect('/login');
 });
 
-Route::get('/backoffice', "BackofficeController@index")->name('backoffice.index');
-
-Auth::routes();
+//Route::get('/backoffice', "BackofficeController@index")->name('backoffice.index');
 
 #Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+//Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::patch('/backoffice/mediador/update', 'Auth\LoginController@update')->name('update');
-
+//Route::patch('/backoffice/mediador/update', 'Auth\LoginController@update')->name('update');
+/*
 #Para testes
 Route::get('/backoffice/mediador/{user?}', function (User $user){
     $user = User::findOrFail($user);
     $appContents = json_decode(Storage::disk('local')->get('page.json'), true);
     return view('backoffice.mediador', compact('appContents', 'user'));
 });
+*/
 
-Route::get('backoffice/mediador/solicitacoes/{utilizador?}', 'SolicitacaoController@show')->name('solicitacao.show');
+//Route::get('backoffice/mediador/solicitacoes/{utilizador?}', 'SolicitacaoController@show')->name('solicitacao.show');
+
 
 #Route::get('/backoffice/mediador/{user}', "BackofficeController@show")->name('backoffice.show');
 ############ Essa rota estou a pensar em fazer /backoffice/{perfil}/{user} -> para pegar os dados
-Route::get('/backoffice/{any}', 'VueController@index')->where('any', '.*');
+
+Auth::routes();
+
+Route::get('/home', 'BackofficeController@index')
+        ->middleware('isAdmin');
+
+Route::get('/backoffice{any}', 'BackofficeController@index')
+        ->where('any', '.*');
 #EndTest
 
 

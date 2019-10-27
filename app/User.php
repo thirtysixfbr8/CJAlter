@@ -23,6 +23,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Perfil', 'perfilId');
     }
 
+    public function userable()
+    {
+        return $this->morphTo();
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

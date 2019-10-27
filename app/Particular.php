@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Particular extends Model
 {
     protected $primaryKey = 'particularId';
-    protected $fillable = ['particularId', 'dataNascimento', 'clienteId'];
+    protected $fillable = ['particularId', 'dataNascimento'];
 
-    public function cliente()
+    public function clienteable()
     {
-        return $this->belongsTo('App\Cliente', 'clienteId');
+        return $this->morphOne('App\Cliente', 'clienteable');
     }
 }

@@ -32,7 +32,7 @@ class LoginController extends Controller
      *
      * #@var string
      */
-    protected $redirectTo = '/backoffice/';
+    protected $redirectTo = '/home';
     /*public function redirectTo(){
         
         return '/backoffice/'.$userId; 
@@ -71,9 +71,4 @@ class LoginController extends Controller
         Auth::logout();
         return redirect('/login');
     }
-
-    
-
-
-
 }
