@@ -29,10 +29,7 @@
     </head>
     <body id="falcon" class="main_Wrapper">    
         <div id="app">
-                {{--<nav-bar logout="{{ route('logout') }}" :user="{{ json_encode($user) }}" img_perfil="{{ asset('assets/images/profile-photo.jpg') }}"></nav-bar>
-                <side-bar :user="{{$user}}"></side-bar>--}}    
-                <router-view :user="{{ json_encode($user) }}" logout="{{ route('logout') }}" img_perfil="{{ asset('assets/images/profile-photo.jpg') }}"></router-view>
-            {{--<form-component :user_edit="{{ json_encode($user) }}" :is_edit="true"></form-component>--}}
+            <router-view :user="{{ json_encode($user) }}" logout="{{ route('logout') }}" img_perfil="{{ asset('assets/images/profile-photo.jpg') }}"></router-view>
         </div>
         <script src="{{ asset('js/app.js') }}"></script> 
         <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
