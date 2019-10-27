@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->date('dataNascimento')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('estado');
             $table->morphs('userable');
             $table->unsignedBigInteger('perfilId')->default('2');
             $table->foreign('perfilId')->references('perfilId')->on('perfils');

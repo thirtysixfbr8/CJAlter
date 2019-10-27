@@ -8,6 +8,6 @@ use App\Perfil;
 class PerfilController extends Controller
 {
     public function get(){
-        return Perfil::all();
+        return Perfil::where('perfilId','<>','1')->get();
     }
 }

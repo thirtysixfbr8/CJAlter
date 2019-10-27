@@ -15,7 +15,7 @@ Vue.component('nav-bar', require('./components/NavBar.vue').default);
 Vue.component('table-solicitacao', require('./components/TableSolicitacao.vue').default);
 Vue.component('table-user', require('./components/TableUsers.vue').default);
 Vue.component('users', require('./components/Users.vue').default);
-//Vue.component('app-component', require('./components/App.vue'));
+Vue.component('app-component', require('./components/App.vue').default);
 
 
 import Vue from 'vue'
@@ -29,37 +29,60 @@ const router = new VueRouter({
         //Mediador
         {
             path:'/backoffice/mediador',
-            name:'dashboard-component',
-            component: Vue.component('dashboard-component')
-        },
-        {
-            path:'/backoffice/mediador/solicitacoes',
-            name:'table-component',
-            component: Vue.component('solicitacao')
+            component: Vue.component('app-component'),
+            children: [
+                {
+                    path:'solicitacoe',
+                    name:'table-component',
+                    component: Vue.component('solicitacao')
+                },
+                {
+                    path:'',
+                    name:'dashboard-components',
+                    component: Vue.component('dashboard-component'),
+                }
+              ]
         },
         //Admin
         {
             path:'/backoffice/admin',
-            name:'dashboard-component',
-            component: Vue.component('dashboard-component')
+            component: Vue.component('app-component'),
+            children: [
+                {
+                    path:'',
+                    name:'dashboard-component',
+                    component: Vue.component('dashboard-component'),
+                },
+                {
+                    path:'solicitacoes',
+                    name:'solicitacoes',
+                    component: Vue.component('solicitacao')   
+                },
+                {
+                    path:'users',
+                    name:'users',
+                    component: Vue.component('users')
+                }   
+              ]
         },
-        {
-            path:'/backoffice/admin/solicitacoes',
-            name:'solicitacoes',
-            component: Vue.component('solicitacao')   
-        },
-        {
-            path:'/backoffice/admin/users',
-            name:'users',
-            component: Vue.component('users')
-        }      
     ]
 })
 
 const app = new Vue({
     el: '#app',
     router,
-    data:{},
-    methods:{},
+    data:{
+        is_edit:true,
+    },
+    methods:{
+        modalAddUser(){
+            this.is_edit = false;
+            this.showModal();
+        },
+        showModal(){
+            $('#form_users').modal('show');
+        },
+        
+    },
     comput:{}
 });

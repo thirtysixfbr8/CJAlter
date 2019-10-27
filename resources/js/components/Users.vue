@@ -7,7 +7,10 @@
                     <div class="row">
                         <div class="col-sm-6 col-xs-12">
                             <h1 class="h3 m-0"> Utilizadores</h1>
-                        <small class="text-muted"> Bem Vindo à CJA Seguros</small>
+                            <small class="text-muted"> Bem Vindo à CJA Seguros</small>
+                        </div>
+                        <div class="col-sm-6 col-xs-12" style="text-align:right">
+                            <button @click="chamaModal()" class="btn btn-raised btn-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">+Adicionar</font></font><div class="ripple-container"></div></button>
                         </div>
                     </div>
                 </div>
@@ -39,7 +42,10 @@ export default {
             .catch(function (error) {
                 console.log(error);
             });
-        }
+        },
+        chamaModal (){
+            $('#form_users').modal('show');
+        },
     },
     mounted() {
         this.getUsers();

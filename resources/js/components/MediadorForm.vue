@@ -67,6 +67,12 @@
                           v-model="user.telemovel"
                           />
                     </div>
+                  <div class="form-group" v-if="!is_edit">
+                      <label class="col-sm-2 control-label">Perfil</label>
+                      <select v-model="user.perfilId" tabindex="3" class="form-control chosen-select" style="width: 240px;">
+                        <option v-for="perfil in perfils" :key="perfil.perfilId">{{perfil.perfil}}</option>
+                      </select>
+                  </div>
                     <div class="form-group" v-if="!is_edit">
                       <input
                           id="password"
@@ -110,23 +116,34 @@ export default {
   data() {
 	  return{
       user:{
-        id: this.user_edit.id,
-        username: this.user_edit.username,
-        name: this.user_edit.name,
-        email: this.user_edit.email,
-        dataNascimento: this.user_edit.dataNascimento,
-        perfilId: this.user_edit.perfilId,
-        telemovel: this.user_edit.telemovel,
-        updated_at: this.user_edit.updated_at,
-        userable_id: this.user_edit.userable_id,
-        userable_type: this.user_edit.userable_type,
-      }
+        username: "",
+        name: "",
+        email: "",
+        dataNascimento: "",
+        perfilId: "",
+        telemovel: "",
+      },
+      perfils:[]
 	  }
   },
   mounted() {
-   console.log(this.user)
+    if(this.is_edit) this.setUser(this.user_edit);
+    this.getPerfils();
   },
   methods:{
+    setUser(user_edit){
+      this.user = user_edit;
+    },
+    getPerfils(){
+      axios.post('/api/getPerfils')
+        .then(response => {
+            this.perfils = response.data;
+            console.log(this.perfils);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    },
     submitUser(){      
       if(this.is_edit) this.updateUser(this.user);    
       else this.createUser(this.user);
