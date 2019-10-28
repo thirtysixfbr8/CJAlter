@@ -7,7 +7,7 @@ window.Vue = require('vue');
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('profile-component', require('./components/Profile.vue').default);
-Vue.component('form-component', require('./components/MediadorForm.vue').default);
+Vue.component('form-component', require('./components/UserForm.vue').default);
 Vue.component('dashboard-component', require('./components/Dashboard.vue').default);
 Vue.component('solicitacao', require('./components/Solicitacao.vue').default);
 Vue.component('side-bar', require('./components/Sidebar.vue').default);
