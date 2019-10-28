@@ -27,7 +27,7 @@
                           autocomplete="name"
                           autofocus
                           placeholder="Nome"
-                          v-model="user.name"
+                          v-model="getUser.name"
                           />
                     </div>
                     <div class="form-group">
@@ -40,7 +40,7 @@
                           autocomplete="birth"
                           autofocus
                           placeholder="Data de Nascimento"
-                          v-model="user.dataNascimento"
+                          v-model="getUser.dataNascimento"
                           />
                     </div>
                     <div class="form-group">
@@ -52,7 +52,7 @@
                           required
                           autocomplete="email"
                           placeholder="Email"
-                          v-model="user.email"
+                          v-model="getUser.email"
                           />
                     </div>
                     <div class="form-group">
@@ -64,7 +64,7 @@
                           required
                           autocomplete="telemovel"
                           placeholder="Telemovel"
-                          v-model="user.telemovel"
+                          v-model="getUser.telemovel"
                           />
                     </div>
                   <div class="form-group" v-if="!is_edit">
@@ -82,7 +82,7 @@
                           name="password"
                           required
                           autocomplete="new-password"
-                          v-model="user.name"
+                          v-model="getUser.name"
                           />
                     </div>
                     <div class="form-group" v-if="!is_edit">
@@ -94,7 +94,7 @@
                           name="password_confirmation"
                           required
                           autocomplete="new-password"
-                          v-model="user.name"
+                          v-model="getUser.name"
                           />
                     </div>
                 </div>
@@ -127,13 +127,9 @@ export default {
 	  }
   },
   mounted() {
-    if(this.is_edit) this.setUser(this.user_edit);
     this.getPerfils();
   },
   methods:{
-    setUser(user_edit){
-      this.user = user_edit;
-    },
     getPerfils(){
       axios.post('/api/getPerfils')
         .then(response => {
@@ -168,6 +164,23 @@ export default {
         .catch(function (error) {
             console.log(error);
         });
+    }
+  },
+  computed:{
+    getUser(){
+      if(this.is_edit) {
+        this.user = this.user_edit;
+      }else{
+        this.user = {
+          username: "",
+          name: "",
+          email: "",
+          dataNascimento: "",
+          perfilId: "",
+          telemovel: "",
+        };
+      }
+      return this.user;
     }
   }
   

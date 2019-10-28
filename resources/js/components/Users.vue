@@ -26,7 +26,6 @@
 <script>
 export default {
     props: ['user'],
-
     data(){
         return{
             users:[]
@@ -44,7 +43,7 @@ export default {
             });
         },
         chamaModal (){
-            $('#form_users').modal('show');
+            this.$emit('event-call-modaluser', false);
         },
     },
     mounted() {

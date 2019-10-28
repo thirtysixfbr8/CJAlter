@@ -72,16 +72,8 @@ const app = new Vue({
     el: '#app',
     router,
     data:{
-        is_edit:true,
     },
     methods:{
-        modalAddUser(){
-            this.is_edit = false;
-            this.showModal();
-        },
-        showModal(){
-            $('#form_users').modal('show');
-        },
         
     },
     comput:{}

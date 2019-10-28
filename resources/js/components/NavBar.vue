@@ -165,7 +165,7 @@
         },
         methods: {
             chamaModal (){
-                $('#form_users').modal('show')
+                this.$emit('event-call-modaluser', true);
             },
         }
     }
