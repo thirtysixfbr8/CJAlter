@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+
+
 
 class LoginController extends Controller
 {
+   
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -19,13 +25,26 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+   
 
     /**
      * Where to redirect users after login.
      *
-     * @var string
+     * #@var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/backoffice/';
+    /*public function redirectTo(){
+        
+        return '/backoffice/'.$userId; 
+        Funçao que era redirecionada ao perfil do Usuario
+        Mas para uma melhor agrupamento de usuarios de acordo com o seu perfil
+        Pode se fazer um switch
+        Tipo: switch(user->perfil())
+             case 1: return /backoffice //Admin
+             case 2: return /backoffice/2(tipo de usuario)/1(id do usuario)
+             E assim sucessivamente
+
+    }*/
 
     /**
      * Create a new controller instance.
@@ -36,4 +55,25 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function update(Request $request, $id){
+
+        $user = App\User::findOrFail($id);
+        $user->name = $request->name;
+        $user->telemovel = $request->telemovel;
+        $user->email = $request->email;
+        $user->save();
+
+
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        return redirect('/login');
+    }
+
+    
+
+
+
 }

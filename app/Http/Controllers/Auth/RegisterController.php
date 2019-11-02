@@ -29,8 +29,14 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/backoffice';
     private $perfils; 
+
+    /*public function redirectTo(){ 
+        $logado = auth()->user()->id;    //Essa funcao permite redirecionar para paginas/rotas especificas. A variável redirectTo deve ser comentada.
+         return '/backoffice/'.$logado;
+             
+    }/*
 
     /**
      * Create a new controller instance.
@@ -43,7 +49,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function showRegistrationForm()
+    public function showRegistrationForm() //me explica bem o propósito dessa função 
     {
         $perfilController = new PerfilController();
 
@@ -64,10 +70,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'alpha', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'telemovel' => ['required', 'min:9','max:15', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'birth' => ['required','date'], #Mediador
         ]);
     }
 
@@ -79,6 +86,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        dd($data['perfilId']); #Depois remove essa cena
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

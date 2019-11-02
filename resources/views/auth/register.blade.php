@@ -10,7 +10,7 @@
                 <form class="form" method="POST" action="{{ route('register') }}">
                   @csrf
                   <div class="header header-primary text-center">
-                    <h4>Sign Up
+                    <h4>Registrar Com:
                     </h4>
                     <div class="social-line">
                       <a href="#" class="btn btn-just-icon">
@@ -27,13 +27,20 @@
                       </a>
                     </div>
                   </div>
-                  <h3 class="mt-0">Falcon
+                  <h3 class="mt-0">CJA Seguros
                   </h3>
-                  <p class="help-block">Enter your personal details below:
+                  <p class="help-block">Insira os seus dados pessoais abaixo:
                   </p>
                   <div class="content">
                     <div class="form-group">
-                      <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Enter Your Name" >
+                        <select name="perfilId" class="form-control mb-10" data-parsley-trigger="change" required>
+                          @foreach($perfils as $perfil)
+                            <option value="{{$perfil['perfilId']}}">{{$perfil['perfil']}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    <div class="form-group">
+                      <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome" >
                       @error('name')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}
@@ -42,7 +49,7 @@
                       @enderror
                     </div>
                     <div class="form-group">
-                      <input id="email" type="email" class="form-control underline-input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter Your Email">
+                      <input id="email" type="email" class="form-control underline-input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
                       @error('email')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}
@@ -59,15 +66,9 @@
                       </span>
                       @enderror
                     </div>
+                    
                     <div class="form-group">
-                      <select name="perfilId" class="form-control mb-10" data-parsley-trigger="change" required>
-                        @foreach($perfils as $perfil)
-                          <option value="{{$perfil['perfilId']}}">{{$perfil['perfil']}}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <input id="password" placeholder="Password..." type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                      <input id="password" placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                       @error('password')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}
@@ -80,17 +81,16 @@
                     </div>
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox" name="optionsCheckboxes" checked> I agree to the
-                        <a href="javascript:;">Terms of Service
+                        <input type="checkbox" name="optionsCheckboxes" checked> Concordo com os
+                        <a href="javascript:;"> Termos de Serviço
                         </a> &amp;
-                        <a href="javascript:;">Privacy Policy
+                        <a href="javascript:;">Políticas de Privacidade
                         </a>
                       </label>
                     </div>
                   </div>
                   <div class="footer text-center mb-20">
-                    <button type="submit" class="btn btn-info btn-raised">Submit
-                    </button>
+                    <button type="submit" class="btn btn-info btn-raised">Registrar</button>
                   </div>
                 </form>
               </div>
@@ -101,7 +101,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-12 text-center mt-20">
-                <a href="login.html" class="text-uppercase text-white">Back
+                <a href="{{ route('login') }}" class="text-uppercase text-white">Já possuo uma conta
                 </a>
               </div>
             </div>

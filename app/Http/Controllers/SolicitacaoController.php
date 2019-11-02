@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mediador;
 use App\Solicitacao;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SolicitacaoController extends Controller
 {
@@ -44,10 +47,20 @@ class SolicitacaoController extends Controller
      * @param  \App\Solicitacao  $solicitacao
      * @return \Illuminate\Http\Response
      */
-    public function show(Solicitacao $solicitacao)
+    public function show(User $utilizador)
     {
-        //
+            $solicitacao = Solicitacao::all();
+            $solicitacao = json_encode($solicitacao);
+            return $solicitacao;
+
+
     }
+
+    /*Route::get('/backoffice/mediador/{user?}', function (User $user){
+        $user = User::findOrFail($user);
+        $appContents = json_decode(Storage::disk('local')->get('page.json'), true);
+        return view('backoffice.mediador', compact('appContents', 'user'));
+    });*/
 
     /**
      * Show the form for editing the specified resource.

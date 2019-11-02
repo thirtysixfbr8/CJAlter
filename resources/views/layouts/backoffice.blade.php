@@ -8,6 +8,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <script> window.Laravel = { CsrfToken: '{{ csrf_token() }}' } </script>
         <!-- vendor css files -->
         <link rel="stylesheet" href="{{ asset('assets/js/vendor/bootstrap/bootstrap.min.css') }}">    
         <link rel="stylesheet" href="{{ asset('assets/css/vendor/animsition.min.css') }}">
@@ -137,22 +139,22 @@
                             <ul class="dropdown-menu pull-right" role="menu">
                                 <li>
                                     <div class="user-info">
-                                        <div class="user-name">Alexander</div>
+                                        <div class="user-name"> {{ auth()->user()->name }} </div>
                                         <div class="user-position online"></div>
                                     </div>
                                 </li>
                                 @foreach ($appContents['userOptions'] as $item)
                                     @if($appContents['userOptions'][0]==$item)
                                         <li>
-                                            <a href="profile.html" role="button" tabindex="0">
+                                            <!-- :to="{ name: 'profile }" role=button-->
                                                 <span class="label label-success pull-right"></span>
-                                                <i class="fa fa-user"></i>{{$item['option']}}</a>
+                                                <i class="fa fa-user"></i>Perfil</a>
                                         </li>
                                         <li class="divider"></li>
                                     @else
                                         <li>
-                                            <a href="login.html" role="button" tabindex="0">
-                                                <i class="fa fa-sign-out"></i>{{$item['option']}}</a>
+                                            <a href="{{ route('logout') }}" role="button" tabindex="0">
+                                                <i class="fa fa-sign-out"></i>Sair</a>
                                         </li>
                                     @endif
                                 @endforeach
@@ -163,7 +165,6 @@
                 </header>
             </div>
             <!--/ HEADER Content  -->
-            @section('sidebar')
             <div id="controls">
                 <aside id="leftmenu">
                     <div id="leftmenu-wrap">
@@ -184,7 +185,7 @@
                                                         <ul>
                                                             @foreach ($item['submenu'] as $subItem)
                                                             <li>
-                                                                <a role="button" tabindex="0">
+                                                                <a role="button" tabindex="0" data-toggle="modal" data-target="#form_users" value="{{$subItem['profile']}}" >
                                                                     <i class="{{$subItem['icon']}}"></i> {{$subItem['title']}}
                                                                 </a>
                                                             </li>
@@ -236,11 +237,11 @@
                     </div>
                 </aside>
             </div>
-            @show
             <!-- Application Content -->
             @yield('content')
             <!--/ Application Content -->
         </div>
+        <script src="{{ asset('js/app.js') }}"></script> 
         <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
         <script src="assets/js/vendor/footable/footable.all.min.js"></script>
@@ -261,7 +262,6 @@
             });
         </script>
 
-        <script src="{{ asset('assets/js/page/index.js') }}"></script>     
-        
+        <script src="{{ asset('assets/js/page/index.js') }}"></script>
     </body>
 </html>

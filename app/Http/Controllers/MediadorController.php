@@ -22,9 +22,11 @@ class MediadorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(User $user)
     {
-        //
+       //
+       Mediador::create();
+        
     }
 
     /**

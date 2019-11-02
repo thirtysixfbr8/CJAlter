@@ -18,6 +18,7 @@ class CreateSolicitacaosTable extends Migration
             $table->unsignedBigInteger('mediadorId');
             $table->foreign('mediadorId')->references('mediadorId')->on('mediadors');
             $table->unsignedBigInteger('clienteId');
+            $table->string('estado');
             $table->foreign('clienteId')->references('clienteId')->on('clientes');
             $table->timestamps();
         });
