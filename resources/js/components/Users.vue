@@ -33,13 +33,16 @@ export default {
     },
     methods:{
         getUsers(){
+            let loader = Vue.$loading.show();
             axios.post('/api/getUsers', {})
             .then(response => {
                 this.users = response.data;
                 console.log(this.solicitacoes)
+                loader.hide();
             })
             .catch(function (error) {
                 console.log(error);
+                loader.hide();
             });
         },
         chamaModal (){

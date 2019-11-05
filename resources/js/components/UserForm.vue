@@ -149,6 +149,7 @@ export default {
       axios.post('/api/updateMediador', {'user':this.user})
         .then(response => {
             this.user = response.data;
+            $.notify("Operação Realizada Com Sucesso");
             $('#form_users').modal('hide');
         })
         .catch(function (error) {
@@ -160,6 +161,8 @@ export default {
       axios.post('/api/createMediador', {'user':this.user})
         .then(response => {
             this.user = response.data;
+            $.notify("Operação Realizada Com Sucesso");
+            $('#form_users').modal('hide');
         })
         .catch(function (error) {
             console.log(error);
