@@ -154,7 +154,7 @@ Data: 02/10/2019
                             "hasSubmenu":false
                         }
                     ],
-                    //Cliente
+                    //Empresas
                     [
                         {
                             "id":1,
@@ -168,6 +168,45 @@ Data: 02/10/2019
                         {
                             "id":2,
                             "name":"Fotografias",
+                            "icon":"fa fa-envelope",
+                            "url":"table-component",
+                            "hasParameter":true,
+                            "active":false,
+                            "hasSubmenu":false
+                        }
+                    ],
+                    //Cliente
+                    [
+                        {
+                            "id":1,
+                            "name":"Seguros",
+                            "icon":"fa fa-envelope",
+                            "url":"table-component",
+                            "hasParameter":false,
+                            "active":true,
+                            "hasSubmenu":false
+                        },
+                        {
+                            "id":2,
+                            "name":"Participar Sinistro",
+                            "icon":"fa fa-envelope",
+                            "url":"table-component",
+                            "hasParameter":true,
+                            "active":false,
+                            "hasSubmenu":false
+                        },
+                        {
+                            "id":3,
+                            "name":"Premios e Bonus",
+                            "icon":"fa fa-envelope",
+                            "url":"table-component",
+                            "hasParameter":true,
+                            "active":false,
+                            "hasSubmenu":false
+                        },
+                        {
+                            "id":4,
+                            "name":"Convidar",
                             "icon":"fa fa-envelope",
                             "url":"table-component",
                             "hasParameter":true,
@@ -189,7 +228,10 @@ Data: 02/10/2019
                 return this.user;
             },
             getSides(){
-                return this.sides[this.getUser.perfilId-1];
+                var perfil = this.getUser.perfilId - 1;
+                console.log(perfil);
+                console.log(this.sides);
+                return this.sides[perfil];
             }
         }
     }

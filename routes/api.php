@@ -22,3 +22,4 @@ Route::post('updateMediador', 'UserController@update');
 Route::post('getUsers', 'UserController@getUsers');
 Route::post('createMediador', 'RegisterController@create');
 Route::post('getPerfils', 'PerfilController@get');
+Route::post('');

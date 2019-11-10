@@ -6,6 +6,9 @@ window.Vue = require('vue');
 
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('select-component', require('./components/SelectSeguro.vue').default);
+Vue.component('seguros-component', require('./components/Seguros.vue').default);
+Vue.component('travel-form', require('./components/TravelForm.vue').default);
 Vue.component('profile-component', require('./components/Profile.vue').default);
 Vue.component('form-component', require('./components/UserForm.vue').default);
 Vue.component('dashboard-component', require('./components/Dashboard.vue').default);
@@ -32,7 +35,7 @@ const router = new VueRouter({
             component: Vue.component('app-component'),
             children: [
                 {
-                    path:'solicitacoe',
+                    path:'solicitacoes',
                     name:'table-component',
                     component: Vue.component('solicitacao')
                 },
@@ -41,7 +44,7 @@ const router = new VueRouter({
                     name:'dashboard-components',
                     component: Vue.component('dashboard-component'),
                 }
-              ]
+                    ]
         },
         //Admin
         {
@@ -50,7 +53,6 @@ const router = new VueRouter({
             children: [
                 {
                     path:'',
-                    name:'dashboard-component',
                     component: Vue.component('dashboard-component'),
                 },
                 {
@@ -63,9 +65,32 @@ const router = new VueRouter({
                     name:'users',
                     component: Vue.component('users')
                 }   
-              ]
+            ]
         },
-    ]
+           //Cliente     
+        {
+            path:'/backoffice/cliente',
+            component: Vue.component('app-component'),
+            children: [
+                {
+                    path:'',
+                    name:"seguros",
+                    component: Vue.component('seguros-component'),
+                },
+                {
+                    path:'',
+                    name:"select",
+                    component: Vue.component('select-component')
+                },
+                {
+                    path:'',
+                    name:"travel",
+                    component: Vue.component('travel-form')
+                }
+
+            ]
+        },
+    ]   
 })
 
 const app = new Vue({
