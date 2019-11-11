@@ -17,6 +17,7 @@ class isAdmin
     {
         if(auth()->check())
         {
+           
             switch($request->user()->perfilId){
                 case 1:
                     return redirect('/backoffice/admin');
