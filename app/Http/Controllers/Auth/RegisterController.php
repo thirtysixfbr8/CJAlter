@@ -86,13 +86,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        dd($data['perfilId']); #Depois remove essa cena
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'telemovel' => $data['telemovel'],
-            'perfilId' => $data['perfilId'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $user = new User();
+
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->telemovel = $data['telemovel'];
+        $user->perfilId = $data['perfilId'];
+        $user->password = Hash::make($data['password']);
+        
+        return $this->createUser($user);
+    }
+
+    private function createUser(User $user){
+        switch($user->perfilId){
+            case 2:
+                $mediadorController = new MediadorController();
+                return $mediadorController->create($user);
+            default:
+                $clienteController = new ClienteController();
+                return $clienteController->create($user);
+        }
     }
 }

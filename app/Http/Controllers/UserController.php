@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Cliente;
 use App\User;
 use Illuminate\Http\Request;
 
-class ClienteController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,25 +22,9 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(User $user) 
+    public function create()
     {
-        $cliente = new Cliente();
-        $user = $cliente->userable()->save($user);
-        $cliente->clienteId = $user->id;
-        $this->createCliente($cliente, $user->perfilId);
-        return $user; 
-    }
-
-    public function createCliente(Cliente $cliente, $perfilId)
-    {
-        switch($perfilId){
-            case 3:
-                $empresaController = new EmpresaController();
-                return $empresaController->create($cliente);
-            default:
-                $particularController = new ParticularController();
-                return $particularController->create($cliente);
-        }
+        //
     }
 
     /**
@@ -58,10 +41,10 @@ class ClienteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Cliente  $cliente
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $cliente)
+    public function show(User $user)
     {
         //
     }
@@ -69,10 +52,10 @@ class ClienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Cliente  $cliente
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cliente $cliente)
+    public function edit(User $user)
     {
         //
     }
@@ -81,22 +64,43 @@ class ClienteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cliente  $cliente
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request)
     {
-        //
+        $user_edit = $request->input("user");
+
+        $mediador = User::findOrFail($user_edit['id']);
+
+        $mediador->username = $user_edit['username'];
+        $mediador->name = $user_edit['name'];
+        $mediador->email = $user_edit['email'];
+        $mediador->dataNascimento = $user_edit['dataNascimento'];
+        $mediador->telemovel = $user_edit['telemovel'];
+
+        if($mediador->save())
+            return $mediador;
+        else null;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Cliente  $cliente
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente $cliente)
+    public function destroy(User $user)
     {
         //
     }
+    
+    public function getUsers(Request $request)
+    {
+        //$user = User::findOrFail($request->get('userId'));
+        return User::orderBy('created_at', 'desc')
+                ->get();
+    }
+
+
 }

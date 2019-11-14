@@ -11,7 +11,7 @@
     -o-animation-fill-mode: both;
     animation-fill-mode: both
 }
-.animsition-loading {
+/*.animsition-loading {
     position: fixed;
     top: 0;
     z-index: 100;
@@ -31,7 +31,7 @@
     color: #aaa;
     text-align: center;
     content: "Estudo Salarial 2018"
-}
+}*/
 .animsition-overlay-slide {
     position: fixed;
     z-index: 1;

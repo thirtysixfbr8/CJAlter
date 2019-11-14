@@ -14,8 +14,8 @@ class Mediador extends Model
         return $this->hasMany('App\Solicitacao', 'solicitacaoId');
     }
 
-    public function user()
+    public function userable()
     {
-        return $this->belongsTo('App\User', 'userId');
+        return $this->morphOne('App\User', 'userable');
     }
 }

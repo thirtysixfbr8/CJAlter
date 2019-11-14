@@ -14,10 +14,8 @@ class CreateMediadorsTable extends Migration
     public function up()
     {
         Schema::create('mediadors', function (Blueprint $table) {
-            $table->bigIncrements('mediadorId');
-            $table->date('dataNascimento');
-            $table->unsignedBigInteger('userId');
-            $table->foreign('userId')->references('id')->on('users');
+            $table->unsignedBigInteger('mediadorId');
+            $table->primary('mediadorId');
             $table->timestamps();
         });
     }

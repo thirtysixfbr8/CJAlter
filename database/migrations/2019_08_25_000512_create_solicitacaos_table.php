@@ -15,10 +15,10 @@ class CreateSolicitacaosTable extends Migration
     {
         Schema::create('solicitacaos', function (Blueprint $table) {
             $table->bigIncrements('solicitacaoId');
-            $table->unsignedBigInteger('mediadorId');
+            $table->unsignedBigInteger('mediadorId')->nullable();
             $table->foreign('mediadorId')->references('mediadorId')->on('mediadors');
             $table->unsignedBigInteger('clienteId');
-            $table->string('estado');
+            $table->integer('estado');
             $table->foreign('clienteId')->references('clienteId')->on('clientes');
             $table->timestamps();
         });

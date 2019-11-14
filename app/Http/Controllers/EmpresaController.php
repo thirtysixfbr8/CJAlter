@@ -22,9 +22,13 @@ class EmpresaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Cliente $cliente)
     {
-        //
+        $empresa = new Empresa();
+        $cliente = $empresa->clienteable()->save($cliente);
+        $empresa->empresaId =$cliente->clienteId;
+        $empresa->save();
+        return $cliente;
     }
 
     /**

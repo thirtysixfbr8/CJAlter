@@ -22,9 +22,13 @@ class ParticularController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Cliente $cliente)
     {
-        //
+        $particular = new Particular();
+        $cliente = $particular->clienteable()->save($cliente);
+        $particular->particularId = $cliente->clienteId;
+        $particular->save();
+        return $cliente;
     }
 
     /**

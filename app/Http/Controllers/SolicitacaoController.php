@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Mediador;
 use App\Solicitacao;
 use App\User;
+use App\AppResult;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class SolicitacaoController extends Controller
@@ -56,11 +58,19 @@ class SolicitacaoController extends Controller
 
     }
 
-    /*Route::get('/backoffice/mediador/{user?}', function (User $user){
-        $user = User::findOrFail($user);
-        $appContents = json_decode(Storage::disk('local')->get('page.json'), true);
-        return view('backoffice.mediador', compact('appContents', 'user'));
-    });*/
+    public function getSolicitacoes(Request $request){
+        $user = User::findOrFail($request->get('userId'));
+        $appResult = new AppResult();
+        try {
+            $result = Solicitacao::with('mediador', 'cliente')
+                ->orderBy('solicitacaos.created_at', 'desc')
+                ->get();
+            $appResult->goodResponse($result, true, '');
+        }catch(Exception $ex){
+            $appResult->badResponse(false, '');
+        }
+        return response()->json($appResult->getResponse());
+    }
 
     /**
      * Show the form for editing the specified resource.

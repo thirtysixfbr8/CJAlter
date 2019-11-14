@@ -14,11 +14,10 @@ class CreateEmpresasTable extends Migration
     public function up()
     {
         Schema::create('empresas', function (Blueprint $table) {
-            $table->bigIncrements('empresaId');
+            $table->unsignedBigInteger('empresaId');
+            $table->primary('empresaId');
             $table->string('actividade')->nullable();
             $table->string('nif')->nullable();
-            $table->unsignedBigInteger('clienteId');
-            $table->foreign('clienteId')->references('clienteId')->on('clientes');
             $table->timestamps();
         });
     }

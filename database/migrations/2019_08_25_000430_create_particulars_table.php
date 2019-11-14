@@ -14,10 +14,8 @@ class CreateParticularsTable extends Migration
     public function up()
     {
         Schema::create('particulars', function (Blueprint $table) {
-            $table->bigIncrements('particularId');
-            $table->date('dataNascimento');
-            $table->unsignedBigInteger('clienteId');
-            $table->foreign('clienteId')->references('clienteId')->on('clientes');
+            $table->unsignedBigInteger('particularId');
+            $table->primary('particularId');
             $table->timestamps();
         });
     }

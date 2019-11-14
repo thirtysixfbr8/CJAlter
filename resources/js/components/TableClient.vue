@@ -70,7 +70,7 @@ export default {
     mounted(){
         console.log('Table Mounted');
         this.camposSolicitacao = this.appContents['solicitacoes']['attrs']
-        axios.get('/backoffice/mediador/solicitacoes/2')
+        axios.get('/backoffice/mediador/solicitacoes/'`${this.solicitacoes.mediadorId}`)
              .then((response)=>{
                  this.solicitacoes = response.data;
              });
