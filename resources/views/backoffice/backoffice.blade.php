@@ -47,6 +47,7 @@
 
         <!-- page Js -->
         <script >
+            window.csrf_token = "{{ csrf_token() }}"
             $(window).load(function () {
                 $('.footable').footable();
             });
