@@ -6,7 +6,9 @@ use App\Mediador;
 use App\Solicitacao;
 use App\User;
 use App\Cliente;
+use App\AppResult;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class SolicitacaoController extends Controller
@@ -65,9 +67,16 @@ class SolicitacaoController extends Controller
 
     public function getSolicitacoes(Request $request){
         $user = User::findOrFail($request->get('userId'));
-        return Solicitacao::with('mediador', 'cliente')
+        $appResult = new AppResult();
+        try {
+            $result = Solicitacao::with('mediador', 'cliente')
                 ->orderBy('solicitacaos.created_at', 'desc')
                 ->get();
+            $appResult->goodResponse($result, true, '');
+        }catch(Exception $ex){
+            $appResult->badResponse(false, '');
+        }
+        return response()->json($appResult->getResponse());
     }
 
     /**

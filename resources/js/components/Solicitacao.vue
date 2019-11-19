@@ -29,13 +29,18 @@ export default {
     },
     methods:{
         getSolicitacoes(userId){
+            let loader = Vue.$loading.show();
             axios.post('/api/getSolicitacoes', {'userId':userId})
             .then(response => {
-                this.solicitacoes = response.data;
-                console.log(this.solicitacoes)
+                let appResultado = response.data;
+                this.solicitacoes = appResultado.result;
+                $('.footable').footable();
+                //this.$nextTick(function(){ $('.selectpicker').selectpicker('refresh');});
+                loader.hide();
             })
             .catch(function (error) {
                 console.log(error);
+                loader.hide();
             });
         }
     },

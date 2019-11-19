@@ -36,14 +36,15 @@
         <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/js/vendor/footable/footable.all.min.js') }}"></script>
-
+        <!--  Notifications Plugin    -->
+        <script src="{{ asset('assets/js/bootstrap-notify.min.js') }}"></script>
         <!--/ vendor javascripts -->
         <script src="{{ asset('assets/bundles/flotscripts.bundle.js') }}"></script>    
         <script src="{{ asset('assets/bundles/d3cripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/bundles/sparkline.bundle.js') }}"></script>
         <script src="{{ asset('assets/bundles/raphael.bundle.js') }}"></script>
         <script src="{{ asset('assets/bundles/morris.bundle.js') }}"></script>
-        <script src="{{ asset('assets/bundles/loadercripts.bundle.js') }}"></script>
+        {{--<script src="{{ asset('assets/bundles/loadercripts.bundle.js') }}"></script>--}}
 
         <!-- page Js -->
         <script >

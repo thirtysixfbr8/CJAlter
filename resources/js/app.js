@@ -24,8 +24,11 @@ Vue.component('app-component', require('./components/App.vue').default);
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 Vue.use(VueRouter);
+Vue.use(Loading);
 
 const router = new VueRouter({
     mode:'history',
