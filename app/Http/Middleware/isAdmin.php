@@ -24,6 +24,7 @@ class isAdmin
                 case 2:
                     return redirect('/backoffice/mediador');
                 case 3:
+                    return redirect('/backoffice/cliente');
                     break;
                 case 4:
                     return redirect('/backoffice/cliente');

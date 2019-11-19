@@ -25,3 +25,4 @@ Route::post('createMediador', 'Auth\RegisterController@create');
 Route::post('getPerfils', 'PerfilController@get');
 Route::post('storeSolicitacoes', 'SolicitacaoController@store');
 Route::post('');
+Route::post('logout','AuthController@logout');

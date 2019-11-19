@@ -137,13 +137,14 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a :href="logout" role="button" tabindex="0" 
-                            onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
+                            
+                            <!--<a :href="logout" role="button" tabindex="0" 
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">-->
+                            <a href="#" role="button" tabindex="0" @click.prevent="logoutForm">
                                 <i class="fa fa-sign-out"></i>Sair</a>
-                                <form id="logout-form" :action="logout" method="POST" style="display: none;">
+                                <!--<form id="logout-form" :action="logout" method="POST" style="display: none;">
                                     @csrf
-                                </form>
+                                </form>-->
                         </li>
                     </ul>
                 </li>
@@ -167,6 +168,17 @@
             chamaModal (){
                 this.$emit('event-call-modaluser', true);
             },
+            logoutForm(){
+                axios.post('/api/logout').then(response => {
+                    console.log(response.data);
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('expiration')
+                    //this.$router.push("/login")
+                    location.reload();
+                }).catch(error => {
+                    location.reload();
+                });
+            }
         }
     }
 </script>
