@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mediador;
 use App\Solicitacao;
 use App\User;
+use App\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,7 +28,7 @@ class SolicitacaoController extends Controller
      */
     public function create()
     {
-        //
+       
     }
 
     /**
@@ -38,7 +39,13 @@ class SolicitacaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mediador = Mediador::findOrFail(2);
+        $cliente = DB::table('clientes')->where('userId',$request->get('clienteId'))->first();
+        $solicitacao = new Solicitacao();
+        $solicitacao->mediadorId = $mediador->mediadorId;
+        $solicitacao->clienteId = $cliente->clienteId;
+        $solicitacao->estado = "pendente";
+        $solicitacao->save();
     }
 
     /**

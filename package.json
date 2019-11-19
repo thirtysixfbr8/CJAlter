@@ -24,7 +24,12 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "file-saver": "^2.0.2",
+        "fs": "0.0.1-security",
+        "jspdf": "file:jsPDF-master/jsPDF-master",
+        "pdfkit": "^0.10.0",
         "vue-loading-overlay": "^3.2.0",
+        "vue-pdf": "^4.0.7",
         "vue-router": "^3.1.3"
     }
 }

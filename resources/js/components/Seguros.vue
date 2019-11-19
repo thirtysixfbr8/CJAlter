@@ -8,6 +8,15 @@
             </h3>
           </div>
           <div class="boxs-body">
+            <div v-show=confirmation id="alert_confirmation" class="alert alert-success alert alert-dismissible fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="alert-heading">A Sua Solicitação foi reencaminhada para Análise!</h4>
+              <p>Os nossos Mediadores terão o prazer de atendê-la o mais brevemente possível. Confira no seu email o Recibo do seu seguro</p>
+              <hr>
+              <p class="mb-0 text-center"> CJA Seguros</p>
+          </div>
             <div class="form-group">
               <label for="filter" style="padding-top: 5px">Procurar:</label>
               <input id="filter" type="text" class="form-control rounded w-md mb-10 inline-block" />
@@ -68,17 +77,17 @@
           </div>
           <button class="btn btn-success" @click="chamaSelect()">Simular Seguro</button>
           <select-component></select-component>
-          <travel-form></travel-form>
+          <travel-form :users='user' @transaction-confirmed="alertClient()"></travel-form>
         </section>
       </div>
   </div>
 </template>
 <script>
 export default {
-  props: "",
+  props: ["user"],
   data() {
     return {
-      //
+      confirmation:false
     };
   },
   mounted() {},
@@ -86,6 +95,11 @@ export default {
     chamaSelect() {
       $("#select_seguro")
         .modal("show");
+    },
+    alertClient(){
+      console.log("entrei");
+      this.confirmation = true;
+      $("#alert_confirmation").alert();
     }
   }
 };

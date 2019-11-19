@@ -17,9 +17,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::post('getSolicitacoes', 'SolicitacaoController@getSolicitacoes');
 Route::post('updateMediador', 'UserController@update');
 Route::post('getUsers', 'UserController@getUsers');
-Route::post('createMediador', 'RegisterController@create');
+Route::post('createMediador', 'Auth\RegisterController@create');
 Route::post('getPerfils', 'PerfilController@get');
+Route::post('storeSolicitacoes', 'SolicitacaoController@store');
 Route::post('');

@@ -8,6 +8,7 @@ window.Vue = require('vue');
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('select-component', require('./components/SelectSeguro.vue').default);
 Vue.component('seguros-component', require('./components/Seguros.vue').default);
+Vue.component('transaction-form', require('./components/TransactionForm.vue').default);
 Vue.component('travel-form', require('./components/TravelForm.vue').default);
 Vue.component('profile-component', require('./components/Profile.vue').default);
 Vue.component('form-component', require('./components/UserForm.vue').default);
@@ -86,6 +87,11 @@ const router = new VueRouter({
                     path:'',
                     name:"travel",
                     component: Vue.component('travel-form')
+                },
+                {
+                    path:'',
+                    name:"transaction",
+                    component: Vue.component('transaction-form')
                 }
 
             ]

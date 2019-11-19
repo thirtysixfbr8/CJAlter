@@ -31,7 +31,8 @@
         <div id="app">
             <router-view :user="{{ json_encode($user) }}" logout="{{ route('logout') }}" img_perfil="{{ asset('assets/images/profile-photo.jpg') }}"></router-view>
         </div>
-        <script src="{{ asset('js/app.js') }}"></script> 
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script> 
         <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/js/vendor/footable/footable.all.min.js') }}"></script>

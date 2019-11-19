@@ -37,7 +37,7 @@
                   placeholder="Bilhete de Identidade"
                 />
               </div-->
-              <div class="btn-group btn-group-toggle" data-toogle="buttons">
+              <div class="btn-group btn-group-toggle btn-group-raised" data-toogle="buttons">
                 <p>Plano Pretendido:</p>
                 <label class="btn btn-secondary active"> 
                   <input v-model="travelData.plan" value="Europa" type="radio" name="plan" id="plan1" autocomplete="off" checked>Europa
@@ -97,18 +97,19 @@
            
           <div class="modal-footer">
             <div id="calculated" class="footer text-align-left mb-20" v-if="calculate">
-              <div class="row d-inline-flex">
+              <div class="row d-inline-flex position-absolute">
+                <p class="text-center">Selecione o Plano:</p>
                 <div class="col-4">
-                    <h4>5.000.000,00kz</h4>
-                    <h3>{{prices.cinco}}</h3>
+                   <p>5.000.000,00kz</p>
+                  <button class="btn btn-success btn-raised" @click="callTransaction(5,prices.cinco)">{{prices.cinco}} Kz</button>
                 </div>
                 <div class="col-4">
-                    <h4>10.000.000,00kz</h4>
-                    <h3>{{prices.dez}}</h3>
+                     <p>10.000.000,00kz</p>
+                  <button class="btn btn-success btn-raised" @click="callTransaction(10,prices.dez)">{{prices.dez}} Kz</button>
                 </div>
                 <div class="col-4">
-                    <h4>15.000.000,00kz</h4>
-                    <h3>{{prices.quinze}}</h3>
+                    <p>15.000.000,00kz</p>
+                  <button class="btn btn-success btn-raised" @click="callTransaction(15,prices.quinze)">{{prices.quinze}} Kz</button>
                 </div>
               </div>
               <button class="btn btn-warning btn-raised text-center" @click="clearInsurance()">Limpar</button>
@@ -120,11 +121,13 @@
         </form>
       </div>
     </div>
+    <transaction-form :userss="users" :travel-data="travelData" :choosed='choosed'></transaction-form>
   </div>
 </template>
 <script>
 import json from '../plans.json'
 export default {
+  props:["users"],
   data() {
 	  return{
       planos: json,
@@ -139,6 +142,10 @@ export default {
           cinco:null,
           dez:null,
           quinze:null
+      },
+      choosed:{
+        plan:0,
+        value:0
       }
 		}
   },
@@ -181,13 +188,20 @@ export default {
           index = null;
         }
 
-        this.prices.cinco = plan["Cinco"][index] * people; 
-        this.prices.dez = plan["Dez"][index] * people; 
-        this.prices.quinze = plan["Quinze"][index] * people; 
+        this.prices.cinco = (plan["Cinco"][index] * people).toFixed(2); 
+        this.prices.dez = (plan["Dez"][index] * people).toFixed(2); 
+        this.prices.quinze = (plan["Quinze"][index] * people).toFixed(2); 
 
         console.log(this.prices)
 
-     }
+     },
+
+     callTransaction(plan, value){
+       $("#form_travel").modal("toggle");
+       $("#form_transaction").modal("show").appendTo('body');
+       this.choosed.plan = plan;
+       this.choosed.value = value;
+     },
   }
   
 };
